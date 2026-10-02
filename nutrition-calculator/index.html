@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition Calculator — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">nutrition calculator</p>
+    <h1 class="masthead__title">what's actually in this dish</h1>
+    <p class="masthead__sub">Enter each ingredient's weight and its per-100g label values.</p>
+  </header>
+
+  <section class="card">
+    <div class="field-row">
+      <label for="servings">Servings</label>
+      <input type="number" id="servings" min="1" value="4">
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div id="lineItems" class="list"></div>
+
+    <form id="addForm" style="display:grid; grid-template-columns: 1.3fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr; gap:6px; margin-top:16px; font-size:0.8rem;">
+      <input type="text" id="ingName" placeholder="Ingredient" required>
+      <input type="number" id="ingGrams" placeholder="grams" min="0" step="any" required>
+      <input type="number" id="ingCal" placeholder="kcal/100g" min="0" step="any" required>
+      <input type="number" id="ingProtein" placeholder="protein/100g" min="0" step="any" required>
+      <input type="number" id="ingCarbs" placeholder="carbs/100g" min="0" step="any" required>
+      <input type="number" id="ingFat" placeholder="fat/100g" min="0" step="any" required>
+      <button type="submit" class="btn btn--add" style="grid-column: span 6;">+ Add ingredient</button>
+    </form>
+
+    <button id="calcBtn" class="btn btn--primary" style="margin-top:16px;">Calculate nutrition</button>
+
+    <div id="result" class="result" hidden>
+      <div class="result__row"><span>Calories (total)</span><span id="rCal">—</span></div>
+      <div class="result__row"><span>Protein (total)</span><span id="rProtein">—</span></div>
+      <div class="result__row"><span>Carbs (total)</span><span id="rCarbs">—</span></div>
+      <div class="result__row"><span>Fat (total)</span><span id="rFat">—</span></div>
+      <div class="result__row result__row--big"><span>Calories / serving</span><span id="rCalServing">—</span></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Estimates depend on the label values you enter — for reference only, not medical advice.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

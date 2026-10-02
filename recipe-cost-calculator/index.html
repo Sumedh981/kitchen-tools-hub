@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Cost Calculator — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">recipe cost calculator</p>
+    <h1 class="masthead__title">knowing what dinner costs</h1>
+    <p class="masthead__sub">Add what goes in. Get a real number per serving.</p>
+  </header>
+
+  <section class="samples" aria-label="Try a sample recipe">
+    <p class="samples__label">try one:</p>
+    <div id="sampleButtons" class="samples__list"></div>
+  </section>
+
+  <main class="receipt" id="receipt">
+    <div class="receipt__notch receipt__notch--top" aria-hidden="true"></div>
+    <section class="receipt__body">
+
+      <div class="field-row">
+        <label for="recipeName">Recipe</label>
+        <input type="text" id="recipeName" placeholder="e.g. Weeknight dal" autocomplete="off">
+      </div>
+
+      <div class="field-row">
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner" selected>Dinner</option>
+          <option value="Dessert">Dessert</option>
+          <option value="Snack">Snack</option>
+        </select>
+      </div>
+
+      <div class="field-row field-row--split">
+        <div>
+          <label for="servings">Servings</label>
+          <input type="number" id="servings" min="1" value="4" inputmode="numeric">
+        </div>
+        <div>
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="₹">₹ INR</option>
+            <option value="$">$ USD</option>
+            <option value="€">€ EUR</option>
+            <option value="£">£ GBP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="budget">Budget for this recipe (optional)</label>
+        <input type="number" id="budget" min="0" step="any" placeholder="e.g. 300">
+      </div>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <datalist id="ingredientPresets"></datalist>
+      <div id="lineItems" class="line-items"></div>
+
+      <form id="addForm" class="add-form">
+        <input type="text" id="ingName" placeholder="Ingredient" list="ingredientPresets" autocomplete="off" required>
+        <input type="number" id="ingQty" placeholder="Qty" min="0" step="any" required>
+        <input type="text" id="ingUnit" placeholder="Unit" autocomplete="off" required>
+        <input type="number" id="ingPrice" placeholder="Price/unit" min="0" step="any" required>
+        <button type="submit" class="btn btn--add">+ Add line</button>
+      </form>
+
+      <div class="divider divider--dashed" aria-hidden="true"></div>
+
+      <button id="calcBtn" class="btn btn--calc">Calculate cost</button>
+      <div id="budgetFlag" class="budget-flag" hidden></div>
+
+      <div id="totals" class="totals" hidden>
+        <div class="totals__row"><span>Subtotal</span><span id="totalSubtotal">—</span></div>
+        <div class="totals__row totals__row--big"><span>Cost per serving</span><span id="totalPerServing">—</span></div>
+      </div>
+
+      <div id="chartSection" class="chart-section" hidden>
+        <p class="chart-section__label">cost by ingredient</p>
+        <div id="chartBars" class="chart-bars"></div>
+      </div>
+
+      <div class="actions" id="actions" hidden>
+        <button id="saveBtn" class="btn btn--ghost">Save recipe</button>
+        <button id="shareBtn" class="btn btn--ghost">Share</button>
+        <button id="printBtn" class="btn btn--ghost">Print / export</button>
+      </div>
+
+    </section>
+    <div class="receipt__notch receipt__notch--bottom" aria-hidden="true"></div>
+  </main>
+
+  <section class="saved" id="savedSection" hidden>
+    <div class="saved__header">
+      <h2>Saved recipes</h2>
+      <select id="savedFilter">
+        <option value="all">All categories</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Snack">Snack</option>
+      </select>
+    </div>
+    <ul id="savedList" class="saved__list"></ul>
+  </section>
+
+  <footer class="footer"><p>Prices you enter stay on your device</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="data.js"></script>
+<script src="calculator.js"></script>
+<script src="storage.js"></script>
+<script src="chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

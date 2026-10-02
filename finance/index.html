@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .price-row { display:flex; justify-content:space-between; font-size:0.85rem; padding:6px 0; border-bottom:1px solid var(--line); }
+  .price-row__trend { font-size:0.75rem; }
+  .trend-up { color: var(--tomato); }
+  .trend-down { color: var(--herb); }
+  .cat-row { display:flex; justify-content:space-between; font-size:0.85rem; padding:4px 0; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">finance</p>
+    <h1 class="masthead__title">what your kitchen costs</h1>
+    <p class="masthead__sub">Five small tools for grocery budgeting and cost planning.</p>
+  </header>
+
+  <!-- 1. Grocery Budget Tracker -->
+  <section class="card">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Grocery budget tracker</h2>
+    <div class="field-row field-row--split">
+      <div>
+        <label for="budgetPeriod">Period</label>
+        <select id="budgetPeriod"><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select>
+      </div>
+      <div>
+        <label for="budgetAmount">Budget amount (₹)</label>
+        <input type="number" id="budgetAmount" min="0" placeholder="e.g. 3000">
+      </div>
+    </div>
+    <button id="setBudgetBtn" class="btn btn--ghost">Set budget</button>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <form id="expenseForm" style="display:grid; grid-template-columns: 1.2fr 0.8fr 1fr; gap:8px;">
+      <input type="text" id="expItem" placeholder="Item" required>
+      <input type="number" id="expAmount" placeholder="₹ amount" min="0" step="any" required>
+      <select id="expCategory">
+        <option>Produce</option><option>Dairy</option><option>Meat</option>
+        <option>Pantry</option><option>Bakery</option><option>Other</option>
+      </select>
+      <button type="submit" class="btn btn--add" style="grid-column: span 3;">+ Log expense</button>
+    </form>
+
+    <div id="budgetStatus" class="result" style="margin-top:16px;"></div>
+    <div id="categoryBreakdown" style="margin-top:12px;"></div>
+  </section>
+
+  <!-- 2. Meal Cost vs Eating Out -->
+  <section class="card gated" data-feature="meal_cost_comparator">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Cook vs eat out</h2>
+    <div class="field-row field-row--split">
+      <div><label for="homeCost">Cost to cook at home (₹)</label><input type="number" id="homeCost" value="150" min="0"></div>
+      <div><label for="outCost">Cost to eat out (₹)</label><input type="number" id="outCost" value="400" min="0"></div>
+    </div>
+    <div class="field-row">
+      <label for="timesPerWeek">Times per week</label>
+      <input type="number" id="timesPerWeek" value="5" min="1">
+    </div>
+    <button id="compareBtn" class="btn btn--ghost">Compare</button>
+    <p id="compareResult" style="font-size:0.9rem; margin-top:12px;"></p>
+  </section>
+
+  <!-- 3. Ingredient Price Tracker -->
+  <section class="card gated" data-feature="price_tracker">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Ingredient price tracker</h2>
+    <form id="priceForm" style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:8px;">
+      <input type="text" id="priceIngredient" placeholder="Ingredient (e.g. Onion)" required>
+      <input type="number" id="priceValue" placeholder="₹ price" min="0" step="any" required>
+      <button type="submit" class="btn btn--add" style="grid-column: span 2;">+ Log price</button>
+    </form>
+    <div id="priceHistory" style="margin-top:16px;"></div>
+  </section>
+
+  <!-- 4. Recipe Batch-Cost Planner -->
+  <section class="card gated" data-feature="batch_cost_planner">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Batch-cost planner</h2>
+    <div class="field-row field-row--split">
+      <div><label for="batchCost">Cost per batch (₹)</label><input type="number" id="batchCost" value="200" min="0"></div>
+      <div><label for="batchCount">Number of batches</label><input type="number" id="batchCount" value="4" min="1"></div>
+    </div>
+    <div class="field-row">
+      <label for="mealsPerBatch">Meals per batch</label>
+      <input type="number" id="mealsPerBatch" value="2" min="1">
+    </div>
+    <button id="batchBtn" class="btn btn--ghost">Calculate</button>
+    <p id="batchResult" style="font-size:0.9rem; margin-top:12px;"></p>
+  </section>
+
+  <!-- 5. Household Budget Split -->
+  <section class="card gated" data-feature="household_split">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Household budget split</h2>
+    <div class="field-row field-row--split">
+      <div><label for="householdBudget">Total grocery budget (₹)</label><input type="number" id="householdBudget" value="6000" min="0"></div>
+      <div><label for="householdSize">Household size</label><input type="number" id="householdSize" value="4" min="1"></div>
+    </div>
+    <button id="splitBtn" class="btn btn--ghost">Split budget</button>
+    <div id="splitResult" class="result" hidden></div>
+  </section>
+
+  <footer class="footer"><p>All figures stay in this browser — nothing is sent anywhere but GA4 event names.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

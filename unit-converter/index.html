@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">unit converter</p>
+    <h1 class="masthead__title">volume, weight, temperature</h1>
+    <p class="masthead__sub">Pick a category, then convert back and forth.</p>
+  </header>
+
+  <section class="card">
+    <div class="field-row">
+      <label for="category">Category</label>
+      <select id="category">
+        <option value="volume">Volume</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+      </select>
+    </div>
+
+    <div class="field-row field-row--split">
+      <div>
+        <label for="value">Value</label>
+        <input type="number" id="value" value="1">
+      </div>
+      <div>
+        <label for="fromUnit">From</label>
+        <select id="fromUnit"></select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <label for="toUnit">To</label>
+      <select id="toUnit"></select>
+    </div>
+
+    <button id="convertBtn" class="btn btn--primary">Convert</button>
+
+    <div id="result" class="result" hidden>
+      <div class="result__row result__row--big"><span id="resultValue">—</span></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Cooking conversions are approximate — precision matters more for baking than general cooking.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

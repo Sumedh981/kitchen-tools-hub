@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baking Calculator — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">baking calculator</p>
+    <h1 class="masthead__title">three baking math tools</h1>
+    <p class="masthead__sub">Pan size scaling, oven temperature conversion, and baker's percentage.</p>
+  </header>
+
+  <section class="card">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Pan size scaling</h2>
+    <div class="field-row field-row--split">
+      <div><label for="panFrom">Original pan (cm diameter)</label><input type="number" id="panFrom" value="20" min="1"></div>
+      <div><label for="panTo">New pan (cm diameter)</label><input type="number" id="panTo" value="25" min="1"></div>
+    </div>
+    <button id="panBtn" class="btn btn--ghost">Get scale ratio</button>
+    <p id="panResult" style="font-size:0.9rem; margin-top:12px;"></p>
+  </section>
+
+  <section class="card">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Oven temperature</h2>
+    <div class="field-row field-row--split">
+      <div><label for="tempValue">Value</label><input type="number" id="tempValue" value="180"></div>
+      <div><label for="tempUnit">From</label>
+        <select id="tempUnit"><option value="C">Celsius</option><option value="F">Fahrenheit</option></select>
+      </div>
+    </div>
+    <div class="field-row">
+      <label for="ovenType">Adjust for</label>
+      <select id="ovenType">
+        <option value="none">No adjustment</option>
+        <option value="fan">Conventional → fan/convection (−20°C)</option>
+        <option value="conventional">Fan/convection → conventional (+20°C)</option>
+      </select>
+    </div>
+    <button id="tempBtn" class="btn btn--ghost">Convert</button>
+    <p id="tempResult" style="font-size:0.9rem; margin-top:12px;"></p>
+  </section>
+
+  <section class="card">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Baker's percentage</h2>
+    <div class="field-row">
+      <label for="flourWeight">Flour weight (g) — this is 100%</label>
+      <input type="number" id="flourWeight" value="500" min="1">
+    </div>
+    <div id="bakerList" class="list"></div>
+    <form id="bakerForm" style="display:grid; grid-template-columns: 1.4fr 0.8fr; gap:8px; margin-top:16px;">
+      <input type="text" id="bakerName" placeholder="Ingredient (e.g. Water)" required>
+      <input type="number" id="bakerGrams" placeholder="grams" min="0" step="any" required>
+      <button type="submit" class="btn btn--add" style="grid-column: span 2;">+ Add ingredient</button>
+    </form>
+    <button id="bakerBtn" class="btn btn--primary" style="margin-top:16px;">Calculate percentages</button>
+    <div id="bakerResult" class="result" hidden></div>
+  </section>
+
+  <footer class="footer"><p>Ratios and adjustments are standard rules of thumb — always sanity-check against your recipe.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

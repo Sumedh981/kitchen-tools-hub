@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — Kitchen Tools</title>
+
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="index.html">Home</a>
+    <a href="recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="baking-calculator/index.html">Baking Calculator</a>
+    <a href="unit-converter/index.html">Unit Converter</a>
+    <a href="ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="shopping-list/index.html">Shopping List</a>
+    <a href="finance/index.html">Finance</a>
+    <a href="privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">a small kitchen toolkit</p>
+    <h1 class="masthead__title">seven tools, no login</h1>
+    <p class="masthead__sub">Everything runs in your browser. Pick a tool below.</p>
+  </header>
+
+  <div class="tool-grid" id="toolGrid">
+    <a class="tool-card" data-tool="recipe-calculator" href="recipe-calculator/index.html">
+      <p class="tool-card__title">Recipe Calculator</p>
+      <p class="tool-card__desc">Scale servings, convert units, estimate cooking time.</p>
+    </a>
+    <a class="tool-card" data-tool="recipe-cost-calculator" href="recipe-cost-calculator/index.html">
+      <p class="tool-card__title">Recipe Cost Calculator</p>
+      <p class="tool-card__desc">Total ingredient cost and cost per serving.</p>
+    </a>
+    <a class="tool-card" data-tool="nutrition-calculator" href="nutrition-calculator/index.html">
+      <p class="tool-card__title">Nutrition Calculator</p>
+      <p class="tool-card__desc">Calories, protein, carbs and fat per serving.</p>
+    </a>
+    <a class="tool-card" data-tool="baking-calculator" href="baking-calculator/index.html">
+      <p class="tool-card__title">Baking Calculator</p>
+      <p class="tool-card__desc">Pan size scaling, oven temperature, baker's percentage.</p>
+    </a>
+    <a class="tool-card" data-tool="unit-converter" href="unit-converter/index.html">
+      <p class="tool-card__title">Unit Converter</p>
+      <p class="tool-card__desc">Volume, weight and temperature, back and forth.</p>
+    </a>
+    <a class="tool-card" data-tool="ingredient-substitutions" href="ingredient-substitutions/index.html">
+      <p class="tool-card__title">Ingredient Substitutions</p>
+      <p class="tool-card__desc">Out of something? Find a swap that works.</p>
+    </a>
+    <a class="tool-card" data-tool="shopping-list" href="shopping-list/index.html">
+      <p class="tool-card__title">Shopping List</p>
+      <p class="tool-card__desc">A simple checklist that remembers itself.</p>
+    </a>
+    <a class="tool-card" data-tool="finance" href="finance/index.html">
+      <p class="tool-card__title">Finance</p>
+      <p class="tool-card__desc">Budget tracking, cost comparisons, price history, and splits.</p>
+    </a>
+  </div>
+
+  <p style="font-size:0.8rem; margin-top:18px;">
+    <a href="privacy/index.html" style="color:var(--ink-soft);">Privacy notice</a>
+  </p>
+
+  <footer class="footer">
+    <p>Built for a data analytics assignment · nothing you enter leaves your device</p>
+    <p><em>Educational project — built for a college assignment. Not a real product or service.</em></p>
+  </footer>
+
+</div>
+
+<script src="shared.js"></script>
+<script>
+  // GA4 EVENT: tool_card_clicked — which tool people choose first,
+  // and in what order across a session. Compare this to which
+  // page_path shows up first in a user's path in GA4 explore.
+  document.getElementById('toolGrid').addEventListener('click', (e) => {
+    const card = e.target.closest('.tool-card');
+    if (!card) return;
+    fireEvent('tool_card_clicked', { tool: card.dataset.tool });
+  });
+</script>
+</body>
+</html>

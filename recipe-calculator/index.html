@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Calculator — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">recipe calculator</p>
+    <h1 class="masthead__title">scale a recipe up or down</h1>
+    <p class="masthead__sub">Add ingredients at their original quantity, then scale to a new serving size.</p>
+  </header>
+
+  <section class="card">
+    <div class="field-row field-row--split">
+      <div>
+        <label for="baseServings">Original servings</label>
+        <input type="number" id="baseServings" min="1" value="4">
+      </div>
+      <div>
+        <label for="targetServings">New servings</label>
+        <input type="number" id="targetServings" min="1" value="8">
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div id="lineItems" class="list"></div>
+
+    <form id="addForm" style="display:grid; grid-template-columns: 1.4fr 0.8fr 0.8fr; gap:8px; margin-top:16px;">
+      <input type="text" id="ingName" placeholder="Ingredient" required>
+      <input type="number" id="ingQty" placeholder="Qty" min="0" step="any" required>
+      <input type="text" id="ingUnit" placeholder="Unit" required>
+      <button type="submit" class="btn btn--add" style="grid-column: span 3;">+ Add ingredient</button>
+    </form>
+
+    <button id="scaleBtn" class="btn btn--primary" style="margin-top:16px;">Scale recipe</button>
+
+    <div id="scaledResult" class="result" hidden></div>
+  </section>
+
+  <section class="card">
+    <h2 style="font-family: var(--font-display); font-size:1.1rem; margin-top:0;">Cooking time estimate</h2>
+    <div class="field-row field-row--split">
+      <div>
+        <label for="foodType">Food</label>
+        <select id="foodType">
+          <option value="roast-chicken">Roast chicken</option>
+          <option value="roast-beef">Roast beef</option>
+          <option value="baked-potato">Baked potato</option>
+          <option value="whole-fish">Whole fish</option>
+        </select>
+      </div>
+      <div>
+        <label for="weightKg">Weight (kg)</label>
+        <input type="number" id="weightKg" min="0" step="0.1" value="1.5">
+      </div>
+    </div>
+    <button id="timeBtn" class="btn btn--ghost">Estimate time</button>
+    <p id="timeResult" style="font-size:0.9rem; margin-top:12px;"></p>
+  </section>
+
+  <footer class="footer"><p>Estimates are approximate — always check doneness with a thermometer.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

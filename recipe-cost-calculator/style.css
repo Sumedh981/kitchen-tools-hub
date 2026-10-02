@@ -1,0 +1,57 @@
+/* Page-specific styles for the Recipe Cost Calculator.
+   Base theme (colors, fonts, nav, card, buttons) comes from ../shared.css */
+
+.samples { margin-bottom: 20px; padding: 0 4px; }
+.samples__label { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 8px; }
+.samples__list { display: flex; flex-wrap: wrap; gap: 8px; }
+.samples__btn { font-family: var(--font-mono); font-size: 0.78rem; background: transparent; border: 1px solid var(--herb); color: var(--herb); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.samples__btn:hover { background: var(--herb); color: var(--paper); }
+
+.receipt { background: var(--paper); position: relative; box-shadow: 0 18px 40px -20px rgba(43,42,37,0.4); }
+.receipt__notch { height: 12px; background: radial-gradient(circle at 8px 6px, transparent 6px, var(--paper) 6.5px) repeat-x; background-size: 16px 12px; }
+.receipt__notch--top { background-position: 0 -6px; }
+.receipt__notch--bottom { transform: rotate(180deg); }
+.receipt__body { padding: 28px 26px 32px; }
+
+.line-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+.line-item { display: flex; align-items: baseline; gap: 6px; font-size: 0.9rem; }
+.line-item__name { white-space: nowrap; overflow: hidden; }
+.line-item__qty { color: var(--ink-soft); font-size: 0.78rem; white-space: nowrap; }
+.line-item__leader { flex: 1; border-bottom: 1px dotted var(--line); margin-bottom: 4px; min-width: 12px; }
+.line-item__price { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.line-item__remove { background: none; border: none; color: var(--tomato); font-family: var(--font-mono); font-size: 0.85rem; cursor: pointer; }
+.line-items:empty::before { content: "no ingredients yet — add your first line below"; display: block; font-size: 0.8rem; color: var(--ink-soft); font-style: italic; padding: 8px 0; }
+
+.add-form { display: grid; grid-template-columns: 1.6fr 0.7fr 0.7fr 1fr; gap: 8px; margin-top: 16px; align-items: end; }
+.add-form input { font-size: 0.85rem; }
+.btn--calc { width: 100%; background: var(--herb); border-color: var(--herb); font-size: 0.95rem; padding: 13px 14px; margin-top: 4px; }
+.actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+.budget-flag { margin-top: 12px; padding: 10px 12px; background: #F6DED2; border: 1px solid var(--tomato); color: var(--tomato); font-size: 0.82rem; }
+
+.totals { margin-top: 20px; padding-top: 14px; border-top: 2px solid var(--ink); }
+.totals__row { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 4px 0; }
+.totals__row--big { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--tomato); padding-top: 6px; }
+
+.chart-section { margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.chart-section__label { font-size: 0.75rem; color: var(--ink-soft); margin: 0 0 10px; }
+.chart-bars { display: flex; flex-direction: column; gap: 8px; }
+.chart-bar-row { display: grid; grid-template-columns: 90px 1fr 60px; align-items: center; gap: 8px; font-size: 0.78rem; }
+.chart-bar-row__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chart-bar-row__track { background: var(--paper-dark); height: 10px; border-radius: 2px; overflow: hidden; }
+.chart-bar-row__fill { background: var(--herb); height: 100%; }
+.chart-bar-row__value { text-align: right; font-variant-numeric: tabular-nums; }
+
+.saved { max-width: 480px; margin: 32px auto 0; padding: 0 4px; }
+.saved__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.saved h2 { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); font-weight: 500; margin: 0; }
+.saved__header select { width: auto; font-size: 0.75rem; }
+.saved__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.saved__list li { display: flex; justify-content: space-between; align-items: center; background: var(--paper); padding: 10px 14px; font-size: 0.85rem; border: 1px solid var(--line); gap: 10px; }
+.saved__list em { font-style: normal; color: var(--ink-soft); }
+.saved__list button { background: none; border: none; font-family: var(--font-mono); color: var(--herb); cursor: pointer; font-size: 0.8rem; }
+
+@media print {
+  .topnav, .masthead, .samples, .add-form, .btn--calc, .actions, .saved, .footer { display: none !important; }
+  .receipt { box-shadow: none; }
+}

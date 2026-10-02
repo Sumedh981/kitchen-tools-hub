@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping List — Ledger</title>
+<!-- GA4 Measurement ID: G-09E1QM5JD5 — the gtag.js script itself is loaded only
+     after cookie consent, from shared.js (see initConsent / loadGA4) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .shop-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .shop-item.checked span { text-decoration: line-through; color: var(--ink-soft); }
+  .shop-item input[type="checkbox"] { width: auto; }
+  .shop-item span { flex: 1; }
+  .shop-item button { background:none; border:none; color: var(--tomato); cursor: pointer; font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav__inner">
+    <a href="../index.html" class="topnav__home">Ledger</a>
+    <button class="topnav__menu-btn">menu</button>
+  </div>
+  <div class="topnav__links">
+    <a href="../index.html">Home</a>
+    <a href="../recipe-calculator/index.html">Recipe Calculator</a>
+    <a href="../recipe-cost-calculator/index.html">Recipe Cost Calculator</a>
+    <a href="../nutrition-calculator/index.html">Nutrition Calculator</a>
+    <a href="../baking-calculator/index.html">Baking Calculator</a>
+    <a href="../unit-converter/index.html">Unit Converter</a>
+    <a href="../ingredient-substitutions/index.html">Ingredient Substitutions</a>
+    <a href="../shopping-list/index.html">Shopping List</a>
+    <a href="../finance/index.html">Finance</a>
+    <a href="../privacy/index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="masthead__eyebrow">shopping list</p>
+    <h1 class="masthead__title">a list that remembers itself</h1>
+    <p class="masthead__sub">Saved to this browser only — check items off as you shop.</p>
+  </header>
+
+  <section class="card">
+    <form id="addForm" style="display:flex; gap:8px;">
+      <input type="text" id="itemName" placeholder="Add an item" required style="flex:1;">
+      <button type="submit" class="btn btn--add">Add</button>
+    </form>
+
+    <div id="items" style="margin-top:18px;"></div>
+
+    <button id="clearBtn" class="btn btn--ghost" style="margin-top:16px;">Clear checked items</button>
+  </section>
+
+  <footer class="footer"><p>Stored only in this browser via localStorage.</p><p><em>Educational project — built for a college assignment. Not a real product or service.</em></p></footer>
+
+</div>
+
+<script src="../shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
